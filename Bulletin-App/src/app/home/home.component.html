@@ -1,0 +1,59 @@
+<!-- Prevent Frame Busting by ensuring the form is the top 
+layer of the window-->
+<script>
+    if (top != window) 
+    {
+        top.location = window.location;
+    }
+</script>
+
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo center">Bulletin App</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a (click)= "Logout()">Logout</a>
+                </li>
+            </ul>
+    </div>
+</nav>
+
+<div class="row">
+    <div class="col s7">
+        <div class="card">
+            <div class="card-content white-text">
+                <div class="row">
+                    <form #bulletinForm="ngForm" (ngSubmit)="onSubmit(bulletinForm)">
+                        <div class="input-field col s12">
+                        <input type="text" name="post" #post="ngModel" [(ngModel)]="bulletinService.selectedPost.post" placeholder="Post">
+                        <label>Post</label>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button class="btn btn-custom right" type="submit">Save</button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s7">
+        <table class="responsive-table highlight">
+            <thead>
+                <tr>
+                    <th>Post</th>
+                </tr>
+            </thead>
+            <tr *ngFor="let bull of bulletinService.post">
+                <td>{{bull.post}}</td>
+                <td>
+                    <a class="action-btn" (click)="onDelete(bull.post, bulletinForm)">
+                        <label>Delete</label>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+

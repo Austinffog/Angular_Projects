@@ -1,0 +1,33 @@
+<!-- Prevent Frame Busting by ensuring the form is the top 
+layer of the window-->
+<script>
+    if (top != window) 
+    {
+        top.location = window.location;
+    }
+</script>
+    
+    <form #loginForm="ngForm" (ngSubmit)="loginForm.valid && onSubmit(loginForm)" class="col s12 white">
+        <div class="row">
+            <div class="input-field col s12">
+                <input class="validate" type="text" #JobRole="ngModel" [(ngModel)]="model.JobRole" name="JobRole"
+                    placeholder="JobRole" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input class="validate" type="password" #Password="ngModel" [(ngModel)]="model.password" name="Password"
+                    placeholder="Password" required minlength="7">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <button [disabled]="!loginForm.valid" class="btn-large btn-submit" type="submit">Login</button>
+            </div>
+        </div>
+    </form>
+
+    <!--Error Message-->
+    <div class="alert" *ngIf="serverErrorMessages">
+        {{serverErrorMessages}}
+    </div>
